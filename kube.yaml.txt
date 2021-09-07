@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-app
+  labels:
+    app: react-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: react-app
+  template:
+    metadata:
+      labels:
+        app: react-app
+    spec:
+      containers:
+        - name: react-app
+          image: 
+          imagePillPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-web
+  labels: 
+     app: react-web
+spec:
+  Selector:
+     app: react-web
+  type: LoadBalancer
+  ports:
+  - nodeport: 1000
+    port: 80
+    targetPort: 80
+
